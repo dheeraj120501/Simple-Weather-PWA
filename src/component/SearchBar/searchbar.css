@@ -94,3 +94,9 @@ input.search-submit {
   color: #292826;
   outline: 0;
 }
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: 80%;
+  }
+}

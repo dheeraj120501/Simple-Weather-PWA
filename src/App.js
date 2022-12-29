@@ -16,22 +16,30 @@ const App = () => {
         TOAST.INFO,
         "Make sure you allow the Geolocation API to retrieve your location's Weather."
       );
-      navigator.geolocation.getCurrentPosition((position) => {
-        (async () => {
-          setLoading(true);
-          try {
-            const data = await fetchWeather({
-              lat: position.coords.latitude,
-              lon: position.coords.longitude,
-            });
-            setWeather(data);
-          } catch (e) {
-            console.log(e);
-            emitToast(TOAST.ERROR, e.message);
-          }
-          setLoading(false);
-        })();
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          (async () => {
+            setLoading(true);
+            try {
+              const data = await fetchWeather({
+                lat: position.coords.latitude,
+                lon: position.coords.longitude,
+              });
+              setWeather(data);
+            } catch (e) {
+              console.log(e);
+              emitToast(TOAST.ERROR, e.message);
+            }
+            setLoading(false);
+          })();
+        },
+        (e) => {
+          emitToast(
+            TOAST.ERROR,
+            "we can't give your location's weather maybe you denied the GeolocationAPI permission 🙀."
+          );
+        }
+      );
     } else {
       emitToast(
         TOAST.WARNING,
