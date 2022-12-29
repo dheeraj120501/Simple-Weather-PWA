@@ -12,10 +12,6 @@ const App = () => {
 
   useEffect(() => {
     if ("geolocation" in navigator) {
-      emitToast(
-        TOAST.INFO,
-        "Make sure you allow the Geolocation API to retrieve your location's Weather."
-      );
       navigator.geolocation.getCurrentPosition(
         (position) => {
           (async () => {
@@ -36,7 +32,11 @@ const App = () => {
         (e) => {
           emitToast(
             TOAST.ERROR,
-            "we can't give your location's weather maybe you denied the GeolocationAPI permission 🙀."
+            "We can't give your location's weather maybe you denied the GeolocationAPI permission 🙀."
+          );
+          emitToast(
+            TOAST.INFO,
+            "Make sure you allow the Geolocation API to retrieve your location's Weather."
           );
         }
       );

@@ -31,7 +31,7 @@ function SearchBar({ setWeather, setLoading }) {
               class="search-field"
               placeholder="Type something..."
               value={query}
-              onKeyPress={async (e) => {
+              onKeyDown={async (e) => {
                 if (e.key === "Enter") {
                   search();
                   e.target.blur();
